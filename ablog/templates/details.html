@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        {{ post.title }}
+        {% endblock %}
+    </title></head>
+<body>
+<div class="row">
+    <div class="leftcolumn">
+        <div class="card">
+            <h1>{{ post.title }}</h1>
+            <small>By: {{ post.author.first_name }}
+                {{ post.author.last_name }}
+                {{ post.post_date }}
+                <hr>
+                <br>
+                {{ post.body|safe }}
+            </small>
+        </div>
+    </div>
+</div>
+    <br>
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+            <small><a class="btn btn-info" href="{% url 'update_post' post.pk %}">Edit</a></small>
+            <small><a class="btn btn-danger" href="{% url 'delete_post' post.pk %}">Delete Blog</a></small>
+        {% endif %}
+    {% endif %}
+</body>
+<hr>
+<a class="btn btn-primary" href="{% url 'home' %}" role="button">Back</a>
+</html>
+{% endblock %}

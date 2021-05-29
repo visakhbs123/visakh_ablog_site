@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Blog Categories</h1>
+{% for item in cat_menu_list %}
+<li>{{ item }}</a></li>
+{% endfor %}
+{% endblock %}
